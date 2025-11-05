@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroConexion | Dashboard Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ========================================================= */
+        /* Variables y Estilos Generales */
+        /* ========================================================= */
+        :root {
+            --color-primario: #00BCD4; /* Azul Cian/Eléctrico */
+            --color-secundario: #AEEA00; /* Verde Lima Brillante */
+            --color-texto-principal: #343a40; /* Gris muy oscuro */
+            --color-fondo-claro: #FFFFFF;
+            --color-fondo-oscuro: #2c3e50; /* Azul muy oscuro/Medianoche */
+            --color-fondo-dashboard: #F1F4F8; /* Gris casi blanco */
+            --color-sombra-profesional: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-fondo-dashboard);
+            color: var(--color-texto-principal);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden; 
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ========================================================= */
+        /* Barra Lateral (Sidebar) */
+        /* ========================================================= */
+        .sidebar {
+            width: 250px;
+            background-color: var(--color-fondo-oscuro);
+            color: var(--color-fondo-claro);
+            padding: 20px;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: 100%;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        /* **** CORRECCIÓN DEL LOGO AQUÍ **** */
+        .sidebar .logo-dash {
+            font-size: 1.5rem; /* Reducimos el tamaño de la fuente */
+            font-weight: 800; 
+            color: var(--color-secundario);
+            margin-bottom: 40px;
+            display: block;
+            text-align: left; /* Aseguramos la alineación */
+            padding-left: 5px; /* Pequeño ajuste para centrarlo visualmente con los links */
+            text-decoration: none;
+        }
+        /* ********************************* */
+
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            color: #bdc3c7; 
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+
+        .sidebar nav a i {
+            margin-right: 12px;
+            font-size: 1.1em;
+        }
+
+        .sidebar nav a:hover {
+            background-color: var(--color-primario);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .sidebar nav a.active {
+            background-color: var(--color-primario);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.5);
+            font-weight: 700;
+        }
+
+        /* ========================================================= */
+        /* Contenido Principal (Main Content) */
+        /* ========================================================= */
+        .main-content {
+            margin-left: 250px; 
+            flex-grow: 1;
+            padding: 30px 40px;
+            transition: all 0.3s;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .top-bar h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--color-texto-principal);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-info .avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, var(--color-primario), #00e5ff);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            box-shadow: var(--color-sombra-profesional);
+        }
+        
+        .profile-info .logout {
+            color: #777;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+        .profile-info .logout:hover {
+            color: var(--color-primario);
+        }
+
+        /* Alerta */
+        .alert-box {
+            background-color: var(--color-secundario);
+            color: var(--color-fondo-oscuro);
+            padding: 20px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 8px rgba(174, 234, 0, 0.4);
+        }
+
+        /* Grid de Estadísticas */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background-color: var(--color-fondo-claro);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--color-sombra-profesional);
+            border-left: 5px solid var(--color-primario);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card i {
+            font-size: 1.8em;
+            color: var(--color-primario);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--color-texto-principal);
+        }
+
+        /* Sección de Proyectos/Actividades */
+        .activity-card {
+            background-color: var(--color-fondo-claro);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--color-sombra-profesional);
+        }
+
+        .activity-card h3 {
+            font-size: 1.5em;
+            color: var(--color-primario);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f4f4f4;
+            transition: background-color 0.2s;
+        }
+        
+        .project-item:hover {
+            background-color: var(--color-fondo-dashboard);
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+        }
+        
+        .project-info strong {
+            color: var(--color-texto-principal);
+            font-weight: 600;
+            display: block;
+        }
+        
+        .project-info span {
+            display: block;
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
+            .sidebar nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .sidebar nav a {
+                padding: 10px 15px;
+                flex-basis: 45%;
+                justify-content: center;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            .sidebar .logo-dash {
+                display: none;
+            }
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <a href="index.html" class="logo-dash">MICROCONEXION</a>
+        
+        <nav>
+            <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="#"><i class="fas fa-briefcase"></i> Mis Proyectos</a>
+            <a href="#"><i class="fas fa-star"></i> Oportunidades</a>
+            <a href="#"><i class="fas fa-dollar-sign"></i> Pagos</a>
+            <a href="#"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+            <a href="login-registro.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        
+        <div class="top-bar">
+            <h2>Panel de Control</h2>
+            <div class="profile-info">
+                <p style="font-weight: 600;">Bienvenido, Daniel</p>
+                <div class="avatar">DA</div>
+                <a href="login-registro.html" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <i class="fas fa-trophy"></i> ¡Felicidades! Estás en el **Plan Básico**. Tu límite es de 5 publicaciones. <a href="planes-premium.html" style="color: var(--color-fondo-oscuro); text-decoration: underline; font-weight: 800;">¡Mejora al Plan Premium!</a>
+        </div>
+
+        <section class="stats-grid">
+            
+            <div class="stat-card" style="border-left-color: var(--color-primario);">
+                <i class="fas fa-coins"></i>
+                <h3>Ganancias del Mes</h3>
+                <p class="value">$1.250.000</p>
+            </div>
+            
+            <div class="stat-card" style="border-left-color: #f39c12;">
+                <i class="fas fa-check-circle" style="color: #f39c12;"></i>
+                <h3>Proyectos Finalizados</h3>
+                <p class="value">7</p>
+            </div>
+            
+            <div class="stat-card" style="border-left-color: #e74c3c;">
+                <i class="fas fa-inbox" style="color: #e74c3c;"></i>
+                <h3>Solicitudes Nuevas</h3>
+                <p class="value">4</p>
+            </div>
+            
+            <div class="stat-card" style="border-left-color: var(--color-secundario);">
+                <i class="fas fa-star" style="color: var(--color-secundario);"></i>
+                <h3>Rating Promedio</h3>
+                <p class="value">4.8</p>
+            </div>
+            
+        </section>
+
+        <section class="activity-card">
+            <h3>Actividad Reciente</h3>
+            
+            <div class="project-item">
+                <div class="project-info">
+                    <strong>Diseño de Logo para Startup</strong>
+                    <span>Cliente: InnovaTech | $150.000 | <span style="color: green; font-weight: 600;">Completado</span></span>
+                </div>
+                <span style="font-size: 0.9em; color: #999;">Hace 2 días</span>
+            </div>
+            
+            <div class="project-item">
+                <div class="project-info">
+                    <strong>Traducción de Documento Legal</strong>
+                    <span>Cliente: Bufete García | $80.000 | <span style="color: #f39c12; font-weight: 600;">En Revisión</span></span>
+                </div>
+                <span style="font-size: 0.9em; color: #999;">Hace 1 semana</span>
+            </div>
+            
+            <div class="project-item">
+                <div class="project-info">
+                    <strong>Configuración de Servidor Web</strong>
+                    <span>Cliente: Hosting Rápido | $320.000 | <span style="color: var(--color-primario); font-weight: 600;">En Curso</span></span>
+                </div>
+                <span style="font-size: 0.9em; color: #999;">Hace 1 mes</span>
+            </div>
+            
+        </section>
+        
+    </main>
+
+</body>
+</html>

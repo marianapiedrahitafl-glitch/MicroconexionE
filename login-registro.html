@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroConexion | Iniciar Sesión / Registro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================= */
+        /* Estilos Globales, Variables y Contenedor (COHERENCIA) */
+        /* ========================================================= */
+        :root {
+            --color-primario: #00BCD4; 
+            --color-secundario: #AEEA00; 
+            --color-texto-principal: #212121; 
+            --color-fondo-claro: #FFFFFF;
+            --color-fondo-oscuro: #212121;
+            --color-azul-oscuro-cta: #0288D1; 
+            --color-header-bg: #FFFFFF; 
+            --color-fondo-gris: #f4f4f4; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--color-texto-principal);
+            background-color: var(--color-fondo-gris);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ========================================================= */
+        /* Header y Navegación (IDÉNTICO a index.html) */
+        /* ========================================================= */
+        header {
+            background-color: var(--color-header-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 800; 
+            color: var(--color-primario);
+            text-decoration: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-texto-principal);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600; 
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primario);
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                padding: 0 20px;
+            }
+        }
+
+        /* ========================================
+        ESTILOS ESPECÍFICOS DE LOGIN/REGISTRO
+        ========================================
+        */
+
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .auth-card h1 {
+            color: var(--color-primario);
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Tabs para alternar entre Login y Registro */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--color-fondo-gris);
+        }
+
+        .auth-tabs button {
+            flex: 1;
+            padding: 15px 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #777;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .auth-tabs button.active {
+            color: var(--color-primario);
+            border-bottom: 3px solid var(--color-primario);
+        }
+
+        /* Estilo de Formulario */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        /* Botón Principal */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--color-azul-oscuro-cta); 
+            color: white;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #01579B;
+        }
+        
+        .forgot-password {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--color-primario);
+            text-decoration: none;
+        }
+
+        /* Ocultar formulario inactivo */
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) { 
+            .auth-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">MICROCONEXION</a>
+                <div class="nav-links">
+                    <a href="index.html#beneficios">Beneficios</a>
+                    <a href="index.html#funciona">Cómo Funciona</a>
+                    <a href="planes-premium.html">Planes Premium</a>
+                    <a href="login-registro.html" class="active">Iniciar Sesión/Registro</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <h1>Bienvenido a MicroConexion</h1>
+            
+            <div class="auth-tabs">
+                <button id="tab-login" class="active">Iniciar Sesión</button>
+                <button id="tab-register">Registrarse</button>
+            </div>
+
+            <form id="form-login" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-email">Correo Electrónico</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit">Entrar</button>
+                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </form>
+
+            <form id="form-register" class="auth-form">
+                <div class="form-group">
+                    <label for="register-name">Nombre Completo</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Correo Electrónico</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <button type="submit" class="btn-submit">Crear Cuenta</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+
+            // Lógica para cambiar entre pestañas
+            tabLogin.addEventListener('click', () => {
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+                formLogin.classList.add('active');
+                formRegister.classList.remove('active');
+            });
+
+            tabRegister.addEventListener('click', () => {
+                tabRegister.classList.add('active');
+                tabLogin.classList.remove('active');
+                formRegister.classList.add('active');
+                formLogin.classList.remove('active');
+            });
+
+            // Lógica de SIMULACIÓN de Inicio de Sesión
+            formLogin.addEventListener('submit', function(event) {
+                // Previene el envío normal del formulario (que recargaría la página)
+                event.preventDefault(); 
+                
+                // SIMULACIÓN: Redirige a la página de ejemplo del Dashboard
+                window.location.href = 'dashboard-ejemplo.html';
+                
+                // NOTA: En un proyecto real, aquí se enviarían los datos al servidor.
+            });
+            
+            // Lógica de SIMULACIÓN de Registro
+            formRegister.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                
+                // SIMULACIÓN: Redirige a la página de ejemplo (o a una de confirmación)
+                alert("¡Registro exitoso! Serás redirigido al panel de control.");
+                window.location.href = 'dashboard-ejemplo.html';
+            });
+
+        });
+    </script>
+
+</body>
+</html>

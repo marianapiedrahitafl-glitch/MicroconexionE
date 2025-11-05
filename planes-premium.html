@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroConexion | Planes Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+        ESTILOS GENERALES Y DE NAVEGACIÓN
+        Asumiendo que estos estilos ya existen en tu página principal
+        ========================================
+        */
+        :root {
+            --color-principal: #00bcd4; /* Un azul cian brillante */
+            --color-secundario: #a3ff00; /* Verde neón/lima */
+            --color-texto-principal: #333;
+            --color-fondo-gris: #f8f8f8;
+            --color-fondo-oscuro: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: var(--color-texto-principal);
+        }
+
+        /* Header (Menú de navegación) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-principal);
+        }
+
+        header nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--color-texto-principal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover, header nav a.active {
+            color: var(--color-principal);
+        }
+
+        /* ========================================
+        ESTILOS ESPECÍFICOS DE LA PÁGINA PREMIUM
+        ========================================
+        */
+
+        .premium-page-content {
+            padding-top: 50px;
+        }
+
+        .hero-premium {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--color-principal), #00e5ff);
+            color: white;
+        }
+
+        .hero-premium h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .hero-premium p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Contenedor de las tarjetas de precio */
+        .pricing-table {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            background-color: var(--color-fondo-gris);
+        }
+
+        .pricing-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card h2 {
+            font-size: 1.8em;
+            color: var(--color-texto-principal);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--color-principal);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .pricing-card .price span {
+            font-size: 0.4em;
+            font-weight: normal;
+            color: #777;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            color: var(--color-secundario);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .btn-principal {
+            display: block;
+            background-color: var(--color-secundario);
+            color: var(--color-fondo-oscuro);
+            padding: 15px 0;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-principal:hover {
+            background-color: #77cc00; /* Un verde más oscuro al pasar el mouse */
+        }
+
+        /* Estilo para la tarjeta destacada (Premium) */
+        .pricing-card.highlight {
+            border: 3px solid var(--color-principal);
+            transform: scale(1.05); /* Ligeramente más grande */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .pricing-card.highlight .ribbon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background-color: var(--color-principal);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+            transform: rotate(5deg);
+        }
+
+        .pricing-card.highlight .price {
+            color: var(--color-secundario);
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 1000px) {
+            .pricing-table {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card {
+                width: 80%;
+                max-width: 400px;
+            }
+
+            .pricing-card.highlight {
+                transform: scale(1.0); 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">MICROCONEXION</div>
+        <nav>
+            <a href="index.html#beneficios">Beneficios</a>
+            <a href="index.html#funciona">Cómo Funciona</a>
+            <a href="planes-premium.html" class="active">Planes Premium</a>
+            <a href="/login-registro.html">Iniciar Sesión/Registro</a>
+        </nav>
+    </header>
+
+    <main class="premium-page-content">
+        
+        <section class="hero-premium">
+            <h1>Maximiza tu Ingreso con Nuestros Planes Premium</h1>
+            <p>Elige el plan que mejor se adapte a tus necesidades para obtener mayor visibilidad, herramientas exclusivas y soporte prioritario.</p>
+        </section>
+
+        <section class="pricing-table">
+            
+            <div class="pricing-card">
+                <h2>Plan Básico</h2>
+                <span class="price">Gratis <span>/ Siempre</span></span>
+                <ul>
+                    <li>Registro y verificación</li>
+                    <li>Publicación de microtrabajos (limitada)</li>
+                    <li>Conexión con clientes (estándar)</li>
+                    <li>Soporte por email (24-48h)</li>
+                </ul>
+                <a href="/registro.html" class="btn-principal" style="background-color: #ccc;">Iniciar Gratis</a>
+            </div>
+
+            <div class="pricing-card highlight">
+                <div class="ribbon">MÁS POPULAR</div>
+                <h2>Plan Premium</h2>
+                <span class="price">$31.900 <span>/ mes</span></span>
+                <ul>
+                    <li>Prioridad en visibilidad (x5)</li>
+                    <li>Herramientas avanzadas de gestión</li>
+                    <li>Descuentos exclusivos en cursos</li>
+                    <li>Soporte prioritario (24/7)</li>
+                    <li>Publicaciones ilimitadas</li>
+                    <li>Acceso anticipado a ofertas</li>
+                </ul>
+                <a href="/pago-premium.html" class="btn-principal">Comenzar Ahora</a>
+            </div>
+
+            <div class="pricing-card">
+                <h2>Plan Universitario</h2>
+                <span class="price">$24.900 <span>/ mes</span></span>
+                <ul>
+                    <li>Prioridad en visibilidad (x2)</li>
+                    <li>Publicación de microtrabajos (semi-limitada)</li>
+                    <li>Certificación de perfil avanzado</li>
+                    <li>Soporte por chat (horario laboral)</li>
+                    <li>Verificación de credenciales académicas</li>
+                </ul>
+                <a href="/pago-universitario.html" class="btn-principal" style="background-color: var(--color-principal);">Obtener Descuento</a>
+            </div>
+
+        </section>
+        
+        </main>
+
+</body>
+</html>
